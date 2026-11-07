@@ -1,0 +1,11 @@
+# Direct dependencies of the opskit toolkit and its lab services (pinned for reproducibility)
+requests==2.31.0
+urllib3==2.2.2
+PyYAML==6.0.1
+Jinja2==3.1.4
+docker==7.1.0
+paramiko==3.4.0
+cryptography==42.0.8
+psutil==5.9.8
+Flask==3.0.3
+pytest==8.2.2
