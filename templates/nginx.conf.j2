@@ -1,0 +1,28 @@
+# Managed by opskit - do not edit by hand. Environment: {{ env_name }}
+limit_req_zone $binary_remote_addr zone=opskit_{{ env_name }}:10m rate={{ rate_limit_rps }}r/s;
+
+upstream opskit_api {
+    server {{ upstream_host }}:{{ upstream_port }};
+}
+
+server {
+    listen 80;
+    server_name {{ server_name }};
+    client_max_body_size {{ client_max_body_size }};
+
+{% for name, value in (extra_headers | default({})) | dictsort %}
+    add_header {{ name }} "{{ value }}" always;
+{% endfor %}
+
+    location /health {
+        proxy_pass http://opskit_api;
+    }
+
+    location /api/ {
+        limit_req zone=opskit_{{ env_name }} burst=10 nodelay;
+        proxy_pass http://opskit_api;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_read_timeout {{ proxy_timeout_s }}s;
+    }
+}

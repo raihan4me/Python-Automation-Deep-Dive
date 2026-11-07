@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opskit"
+version = "1.0.0"
+description = "Operations automation toolkit built in the Python Automation Deep Dive lab"
+requires-python = ">=3.12"
+dependencies = [
+  "requests>=2.31,<3",
+  "PyYAML>=6.0",
+  "Jinja2>=3.1",
+  "docker>=7.1",
+  "paramiko>=3.4",
+  "psutil>=5.9",
+]
+
+[project.scripts]
+opskit = "opskit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["opskit*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

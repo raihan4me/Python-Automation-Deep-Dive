@@ -1,0 +1,9 @@
+defaults:
+  upstream_host: opskit-mockapi
+  upstream_port: 5000
+  client_max_body_size: 1m
+  proxy_timeout_s: 10
+environments:
+  qa:
+    host_port: "eighty"
+    rate_limit_rps: 0

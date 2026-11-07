@@ -1,0 +1,19 @@
+user: opsuser
+key_file: ~/.ssh/opskit_ed25519
+known_hosts: config/known_hosts
+nodes:
+  - name: node1
+    host: 127.0.0.1
+    port: 2221
+  - name: node2
+    host: 127.0.0.1
+    port: 2222
+checks:
+  - name: hostname
+    cmd: cat /etc/hostname
+  - name: kernel
+    cmd: uname -r
+  - name: os
+    cmd: . /etc/os-release && echo "$PRETTY_NAME"
+  - name: root_disk_pct
+    cmd: df --output=pcent / | tail -n 1

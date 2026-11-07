@@ -1,0 +1,2 @@
+# opskit-report: summarise access logs every minute (lab setting; use */15 or hourly in production)
+* * * * * cd "$HOME/opskit" && /usr/bin/flock -n /tmp/opskit-report.lock "$HOME/opskit/.venv/bin/opskit" logs data/logs/access.log data/logs/access.log.1.gz --threshold 10 --output reports/access-summary.json >> "$HOME/opskit/reports/cron.log" 2>&1

@@ -1,0 +1,19 @@
+defaults:
+  upstream_host: opskit-mockapi
+  upstream_port: 5000
+  client_max_body_size: 1m
+  proxy_timeout_s: 10
+environments:
+  staging:
+    host_port: 8080
+    server_name: staging.opskit.local
+    rate_limit_rps: 20
+    extra_headers:
+      X-OpsKit-Env: staging
+  prod:
+    host_port: 8090
+    server_name: opskit.local
+    rate_limit_rps: 5
+    extra_headers:
+      X-OpsKit-Env: prod
+      Strict-Transport-Security: "max-age=31536000"
